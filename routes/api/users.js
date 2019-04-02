@@ -52,7 +52,7 @@ const newUser = new User({
                 return res.status(500).json({ error: err.message }); 
               }
               const transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRIDUSER, pass: process.env.SENDGRIDPASS} });
-              const mailOptions = { from: 'no-reply@projte31.com', to: newUser.email, subject: 'Verification du compte', text: 'Bonjour,'+newUser.name+'\n\n' + 'Verifier votre compte en cliquant sur ce lien: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + newToken.token + '.\n' };
+              const mailOptions = { from: 'no-reply@projte31.com', to: newUser.email, subject: 'Verification du compte', text: 'Bonjour'+newUser.name+'\n\n' + 'Verifier votre compte en cliquant sur ce lien: \nhttps:\/\/' + process.env.FQDN + '\/confirmation\/' + newToken.token + '.\n' };
               transporter.sendMail(mailOptions, err => {
               if (err) { 
                 return res.status(500).json({ error: err.message }); 
@@ -206,7 +206,7 @@ router.post('/resend', (req, res) => {
         }
         // Send the email
         const transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRIDUSER, pass: process.env.SENDGRIDPASS} });
-        const mailOptions = { from: 'no-reply@projte31.com', to: user.email, subject: 'Verification du compte', text: 'Bonjour,'+user.name+'\n\n' + 'Verifiez votre compte en cliquant sur ce lien: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + newToken.token + '.\n' };
+        const mailOptions = { from: 'no-reply@projte31.com', to: user.email, subject: 'Verification du compte', text: 'Bonjour'+user.name+'\n\n' + 'Verifiez votre compte en cliquant sur ce lien: \nhttps:\/\/' + process.env.FQDN + '\/confirmation\/' + newToken.token + '.\n' };
         transporter.sendMail(mailOptions, err => {
           if (err) { 
             return res.status(500).json({ error: err.message }); 
