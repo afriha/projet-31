@@ -20,7 +20,6 @@ let b=String(arguments.dchiffre);
 let op=String(arguments.opr);
 let fonc=a+op+b;
 const resultat=eval(fonc);
-console.log(resultat);
   res.json({ stdout : resultat })
   });
 module.exports = router;
