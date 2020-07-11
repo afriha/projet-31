@@ -50,8 +50,14 @@ var options = {
   tags: {
     'projet-31.version': '3.0',
   },
-  metrics: metrics,
-  logger: logger,
+  logger: {
+    info: function logInfo(msg) {
+      console.log('INFO  ', msg);
+    },
+    error: function logError(msg) {
+      console.log('ERROR ', msg);
+    },
+  }, 
 };
 var tracer = initTracer(config, options);
 if(env === 'Production'){
