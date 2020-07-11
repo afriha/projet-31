@@ -2,20 +2,6 @@
   "name": "in-projet-31",
   "version": "3.0.0",
   "description": "Projet IN application",
-  "bundledDependencies": [
-    "bcryptjs",
-    "body-parser",
-    "compression",
-    "dotenv",
-    "express",
-    "is-empty",
-    "jsonwebtoken",
-    "mongoose",
-    "nodemailer",
-    "passport",
-    "passport-jwt",
-    "validator"
-  ],
   "main": "server.js",
   "scripts": {
     "first-start": "npm install --production",
