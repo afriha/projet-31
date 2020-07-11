@@ -18,7 +18,7 @@
   ],
   "main": "server.js",
   "scripts": {
-    "first-start": "npm install --production back-end.tgz",
+    "first-start": "npm install --production",
     "start": "node server.js"
   },
   "author": "Abdelhak FRIHA, Hamza EL HAFA, Zahra AZZAZ",
@@ -30,6 +30,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "is-empty": "^1.2.0",
+    "jaeger-client": "^3.18.0",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.4.1",
     "nodemailer": "^5.0.0",

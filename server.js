@@ -36,6 +36,24 @@ app.use("/api/users", users);
 app.use("/api/logiciels", logiciels);
 // Production
 const env = process.env.NODE_ENV;
+var initTracer = require('jaeger-client').initTracer;
+
+// See schema https://github.com/jaegertracing/jaeger-client-node/blob/master/src/configuration.js#L37
+var config = {
+  serviceName: 'projet-31',
+  sampler: {
+    type: 'const',
+    param: 1,
+  },
+};
+var options = {
+  tags: {
+    'projet-31.version': '3.0',
+  },
+  metrics: metrics,
+  logger: logger,
+};
+var tracer = initTracer(config, options);
 if(env === 'Production'){
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
