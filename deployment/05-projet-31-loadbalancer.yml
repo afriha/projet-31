@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: projet-31
+  namespace: projet
+spec:
+  selector:
+    app: "projet-31"
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer

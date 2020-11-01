@@ -34,35 +34,12 @@ require("./config/passport")(passport);
 app.use(compression());
 app.use("/api/users", users);
 app.use("/api/logiciels", logiciels);
-// Tracer init (Jaeger)
-var initTracer = require('jaeger-client').initTracer;
-var config = {
-  serviceName: 'projet-31',
-  sampler: {
-    type: 'const',
-    param: 1,
-  },
-};
-var options = {
-  tags: {
-    'projet-31.version': '4.0',
-  },
-  logger: {
-    info: function logInfo(msg) {
-      console.log('INFO  ', msg);
-    },
-    error: function logError(msg) {
-      console.log('ERROR ', msg);
-    },
-  }, 
-};
-var tracer = initTracer(config, options);
 // Production
 const env = process.env.NODE_ENV;
 if(env === 'Production'){
   app.use(express.static('client/build'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client2', 'build', 'index.html'));
   });
 }
 const port = process.env.PORT || 5000; 
