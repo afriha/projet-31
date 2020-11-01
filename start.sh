@@ -1,4 +1,4 @@
-#/bin/sh
+#/bin/bash
 #Create databse user on mongodb
 mongo creatdbuser.js
 #Installation du projet
