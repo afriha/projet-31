@@ -7,7 +7,8 @@ const logiciels = require("./routes/api/logiciels");
 const app = express();
 const compression = require('compression');
 const path = require('path');
-
+const dotenv = require("dotenv");
+dotenv.config();
 // Bodyparser middleware
 app.use(
   bodyParser.urlencoded({
