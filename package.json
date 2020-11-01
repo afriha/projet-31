@@ -21,6 +21,7 @@
     "opentracing": "*",
     "mongoose": "*",
     "nodemailer": "*",
+    "nodemailer-sendgrid": "*",
     "passport": "*",
     "passport-jwt": "*",
     "validator": "*"
