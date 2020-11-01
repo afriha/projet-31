@@ -8,7 +8,7 @@ const initTracer = require("../tracing")
 const tracer = initTracer("Calculatrice");
 router.post("/calculatrice", passport.authenticate("jwt", { session: false }),
   (req, res) => {
-  const span = tracer.startSpan("Register");
+  const span = tracer.startSpan("Calculatrice");
   const { errors, isValid } = validateCalculInput(req.body);
   // Check validation
   if (!isValid) {

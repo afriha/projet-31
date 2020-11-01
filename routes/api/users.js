@@ -5,10 +5,10 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const nodemailerSendgrid = require('nodemailer-sendgrid');
 const Validator = require("validator");
 const isEmpty = require("is-empty");
 const { Tags } = require('opentracing');
-
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -77,9 +77,13 @@ router.post("/register", (req, res) => {
                 span.finish();
                 return res.status(500).json({ error: err.message }); 
               }
-              const transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRIDUSER, pass: process.env.SENDGRIDPASS} });
-              const mailOptions = { from: 'no-reply@projte31.com', to: newUser.email, subject: 'Verification du compte', text: 'Bonjour'+newUser.name+'\n\n' + 'Verifier votre compte en cliquant sur ce lien: \nhttp:\/\/' + process.env.FQDN + '\/confirmation\/' + newToken.token};
-              transporter.sendMail(mailOptions, err => {
+              const transport = nodemailer.createTransport(
+                nodemailerSendgrid({
+                    apiKey: process.env.SENDGRID_API_KEY
+                })
+              );
+              const mailOptions = { from: 'no-reply@projte31.com', to: newUser.email, subject: 'Verification du compte', text: 'Bonjour'+newUser.name+'\n\n' + 'Verifier votre compte en cliquant sur ce lien: \nhttp:\/\/' + process.env.IP + '\/confirmation\/' + newToken.token};
+              transport.sendMail(mailOptions, err => {
                 if (err) { 
                   span.setTag(Tags.ERROR, true)
                   span.setTag(Tags.HTTP_STATUS_CODE, err.statusCode || 500);
@@ -87,15 +91,8 @@ router.post("/register", (req, res) => {
                   return res.status(500).json({ error: err.message }); 
                 }
                 res.status(200).json('Inscription réussie! Un email de verification a été envoyé à ' + newUser.email + '.')
-                .then( () => {
-                  span.setTag(Tags.HTTP_STATUS_CODE, 200)
-                  span.finish();
-                })
-                .catch( err => {
-                  span.setTag(Tags.ERROR, true)
-                  span.setTag(Tags.HTTP_STATUS_CODE, err.statusCode || 500);
-                  span.finish();
-                });      
+                span.setTag(Tags.HTTP_STATUS_CODE, 200)
+                span.finish();
               });
             });
           })
