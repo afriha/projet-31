@@ -1,5 +1,5 @@
 # Projet-31
-A MERN App that allows users to create an account, verify it with their emails and use a small calculator app. The project also contains a Dockerfile and Kubernetes deployement files. The Gitlab-CI pipeline creates a docker image and pushes it to DockerHub. 
+A MERN App that allows users to create an account, verify it with their emails and use a small calculator app. The project also contains a Dockerfile and Kubernetes deployment files. The Gitlab-CI pipeline creates a docker image and pushes it to DockerHub. 
 
 ## Requirements
 - For the MERN APP: mongodb database installed and a sendgrid api_key
