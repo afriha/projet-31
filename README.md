@@ -1,4 +1,4 @@
-### Projet-31
+# Projet-31
 A MERN App that allows users to create an account, verify it with their emails and use a small calculator app. The projet also contains a Dockerfile and Kubernetes deployement files. The Gitlab-CI pipeline creates a docker image and pushes it to DockerHub. 
 
 ## Requirements
